@@ -10,7 +10,11 @@ This [notebook](explaination.ipynb) compares a custom CNN and a fine-tuned Mobil
 | Custom CNN | 42.08% | 18.61% | 27.02% |
 | MobileNetV3-Small | 94.81% | 55.63% | 88.06% |
 
-These figures come from the saved notebook run. Gaussian blur caused the largest accuracy drop for both trained models. The notebook also reports macro F1, macro recall, and a per-class report and confusion matrix for MobileNetV3-Small on clean images.
+The saved run used 31,367 training images, 7,842 validation images and **12,630 test images**. Each test image was evaluated three times. The notebook applies a Gaussian blur with radius 2 for the blur condition and scales brightness to 35% of the original for the low-light condition.
+
+**Blur had the largest effect.** MobileNetV3-Small lost 39.18 percentage points of accuracy under blur and 6.75 points under reduced brightness. It still led the custom CNN in all three conditions. These measurements cover the two simulated changes at the settings above.
+
+The class-balanced results show the same pattern. MobileNetV3-Small’s macro recall fell from **0.9279** on clean signs to **0.5455** under blur. Macro recall gives each of the 43 classes equal weight, so common signs cannot dominate that measure. To inspect a particular class, open the [notebook](explaination.ipynb) and find `FINAL MODEL COMPARISON`, the clean-image classification report, or the per-class recall output.
 
 ## Run on Kaggle
 
